@@ -12,19 +12,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install SSH key
+      - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.PRIVATE_KEY }}
-          name: id_rsa
-          known_hosts: 54.159.69.109
-          #config: ${{ secrets.CONFIG }} # ssh_config; optional
-          if_key_exists: fail
-#      - name: Create key
-#        shell: bash
-#        run: 'echo "$PRIVATE_KEY" > key.cert'
-#        env:
-#          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.KNOWN_HOST }} >> ~/.ssh/known_hosts
       - name: Copy files
         shell: bash
 #        run: scp -r ec2-user@54.159.69.109:/var/www src
