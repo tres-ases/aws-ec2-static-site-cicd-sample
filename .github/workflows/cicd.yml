@@ -27,4 +27,5 @@ jobs:
 #          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
       - name: Copy files
         shell: bash
-        run: scp -r ec2-user@54.159.69.109:/var/www src
+#        run: scp -r ec2-user@54.159.69.109:/var/www src
+        run: rsync ./src/ ec2-user@54.159.69.109:/var/www
