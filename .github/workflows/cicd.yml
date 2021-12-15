@@ -12,16 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: SSH Server Deploy
-        uses: kostya-ten/ssh-server-deploy@v4
-        with:
-          host: 54.159.69.109
-          port: 22
-          username: ec2_user
-          private_key: ${{ secrets.PRIVATE_KEY }}
-          scp_source: /
-          scp_target: /var/www
-          before_script: |
-            df -h
-          after_script: |
-            whoami
+      - name: Copy files
+        shell: bash
+        run: 'echo "PRIVATE_KEY" > key.cert'
+        env:
+          PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
+      - name: Copy files
+        shell: bash
+        run: scp -r -i ./key.cert ec2-user@54.159.69.109:/var/www src
