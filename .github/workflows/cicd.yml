@@ -1,0 +1,27 @@
+name: deploy-static-site
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: SSH Server Deploy
+        uses: kostya-ten/ssh-server-deploy@v4
+        with:
+          host: 54.159.69.109
+          port: 22
+          username: ec2_user
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          scp_source: /
+          scp_target: /var/www
+          before_script: |
+            df -h
+          after_script: |
+            whoami
