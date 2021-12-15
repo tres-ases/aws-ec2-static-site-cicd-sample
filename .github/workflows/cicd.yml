@@ -21,5 +21,5 @@ jobs:
         run: ssh-keyscan -H 54.159.69.109 >> ~/.ssh/known_hosts
       - name: Copy files
         shell: bash
-#        run: scp -r ec2-user@54.159.69.109:/var/www src
-        run: rsync ./src/ ec2-user@54.159.69.109:/var/www
+        run: scp -r ec2-user@54.159.69.109:/var/www src
+#        run: rsync ./src/ ec2-user@54.159.69.109:/var/www
