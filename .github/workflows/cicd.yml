@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Copy files
         shell: bash
-        run: 'echo "PRIVATE_KEY" > key.cert'
+        run: 'echo "$PRIVATE_KEY" > key.cert'
         env:
           PRIVATE_KEY: ${{secrets.PRIVATE_KEY}}
       - name: Copy files
